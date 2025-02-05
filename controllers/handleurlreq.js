@@ -3,19 +3,19 @@ const urlmodel = require('../models/urlmodel');
 
 //post request
 async function handlepostreq(req, res) {
-    const redirect = req.body
-    if (!redirect.url) {
+    const body = req.body
+    if (!body.url) {
         return res.status(400).json({ error: "url is required" })
     }
     const shortid = str6_36(8)
     await urlmodel.create({
         urlid: shortid,
-        redirecturl: redirect.url,
+        redirecturl: body.url,
         history: []
     })
 
-    return res.json({
-        urlid: shortid
+    return res.render("home",{
+        id:shortid
     })
 }
 
