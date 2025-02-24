@@ -11,7 +11,8 @@ async function handlepostreq(req, res) {
     await urlmodel.create({
         urlid: shortid,
         redirecturl: body.url,
-        history: []
+        history: [],
+        createdby:req.user._id
     })
 
     return res.render("home",{
