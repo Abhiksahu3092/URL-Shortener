@@ -19,9 +19,11 @@ async function handleuserlogin(req,res){
     if(!loggeduser){
         return res.render("login");
     }
-    const sessionid=uuidv4();
-    setuser(sessionid,loggeduser);
-    res.cookie('uuid',sessionid)
+    //const sessionid=uuidv4();
+    //setuser(sessionid,loggeduser);
+
+    const token=setuser(loggeduser)
+    res.cookie('uuid',token)
 
     return res.redirect("/input");
 
