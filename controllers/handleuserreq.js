@@ -15,17 +15,21 @@ async function handleusersignup(req,res) {
 
 async function handleuserlogin(req,res){
     const {name,email,password}=req.body;
+    //console.log(req.body);
     const loggeduser=await user.findOne({email,password});
+    //console.log(logggeduser)
     if(!loggeduser){
         return res.render("login");
     }
-    //const sessionid=uuidv4();
-    //setuser(sessionid,loggeduser);
+    
+    const sessionid=uuidv4();
+    setuser(sessionid,loggeduser);
 
     const token=setuser(loggeduser)
-    res.cookie('uuid',token)
+    res.cookie("uuid",token)
 
     return res.redirect("/input");
+    //return res.json({token})
 
 }
 
