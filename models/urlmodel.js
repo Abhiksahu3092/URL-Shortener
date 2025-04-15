@@ -17,10 +17,6 @@ const urlschema=new mongoose.Schema({
             }
         }
     ],
-    createdby:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"users"
-    }
 },{timestamps:true});
 
 const urlmodel=mongoose.model('urlmodel',urlschema);

@@ -4,9 +4,7 @@ const path=require("path")
 
 const urlroute=require('./routes/route');
 const staticroute=require('./routes/staticroute');
-const userroute=require("./routes/userroute");
 const cookieparser=require("cookie-parser");
-const {checkforauth,restriction}=require("./midleware/auth")
 
 const app=express();
 const port=2000;
@@ -21,11 +19,9 @@ app.set("views",path.resolve("./views"))
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieparser());
-app.use(checkforauth);
 
 
-app.use("/output",restriction(["NORMAL","ADMIN"]),urlroute)
-app.use("/user",userroute)
+app.use("/output",urlroute)
 app.use("/input",staticroute)
 
 app.listen(port,()=>{

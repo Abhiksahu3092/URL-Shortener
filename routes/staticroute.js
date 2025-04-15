@@ -1,34 +1,20 @@
 const express=require('express');
 const router=express.Router();
 const URL=require("../models/urlmodel");
-const { restriction } = require('../midleware/auth');
+const urlmodel=require("../models/urlmodel")
 
-router.get("/admin/allurls",restriction(["ADMIN"]),async (req,res)=>{
-    if(!req.user){
-        return res.render("login")
+router.get("/",async (req,res)=>{
+    const allurls = await URL.find({})
+    const shortid = req.query.urlid;
+    let url=null;
+    if(shortid){
+        url = shortid
     }
-    const allurls=await URL.find({})
     return res.render("home",{
         urls: allurls,
+        id: url
     });
 })
 
-router.get("/",restriction(["NORMAL","ADMIN"]),async (req,res)=>{
-    if(!req.user){
-        return res.render("login")
-    }
-    const allurls=await URL.find({createdby:req.user._id})
-    return res.render("home",{
-        urls: allurls,
-    });
-})
-
-router.get("/signup", async (req,res)=>{
-    return res.render("signup")
-})
-
-router.get("/login", async (req,res)=>{
-    return res.render("login")
-})
 
 module.exports=router;
