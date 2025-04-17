@@ -24,7 +24,7 @@ app.use(cookieparser());
 
 
 app.use("/output",urlroute)
-app.use("/input",staticroute)
+app.use("/",staticroute)
 
 app.listen(port,()=>{
     console.log(`server is running on port ${port}`);

@@ -12,7 +12,7 @@ async function handlepostreq(req, res) {
     })
 
 
-    return res.redirect(`/input?urlid=${shortid}`);
+    return res.redirect(`/?urlid=${shortid}`);
 }
 
 async function handlegetreq(req, res) {
