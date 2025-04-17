@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express=require('express');
 const connect=require('./connect');
 const path=require("path")
@@ -7,9 +9,9 @@ const staticroute=require('./routes/staticroute');
 const cookieparser=require("cookie-parser");
 
 const app=express();
-const port=2000;
+const port=process.env.PORT || 2000;
 
-connect("mongodb://127.0.0.1:27017/urlshortner").then(()=>{
+connect(process.env.MONGO_URL).then(()=>{
     console.log("Connection Successful")
 })
 
